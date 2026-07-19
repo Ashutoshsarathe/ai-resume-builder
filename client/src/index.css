@@ -1,0 +1,135 @@
+@import "tailwindcss";
+
+@media print {
+    @page {
+        size: A4;
+        margin: 6mm;
+    }
+
+    body {
+        background: white;
+    }
+
+    #editor-header,
+    #editor-form {
+        display: none !important;
+    }
+
+    #editor-main {
+        display: block !important;
+        max-width: none !important;
+        padding: 0 !important;
+    }
+
+    #preview-container {
+        position: static !important;
+        width: 100% !important;
+        height: auto !important;
+    }
+
+    #preview-container> :not(#resume-preview) {
+        display: none !important;
+    }
+
+    #resume-preview {
+        position: static !important;
+        width: 100% !important;
+        box-shadow: none !important;
+    }
+
+    #resume-preview>div {
+        min-height: auto !important;
+    }
+
+    #resume-preview h1 {
+        font-size: 21px !important;
+    }
+
+    #resume-preview h2 {
+        font-size: 10px !important;
+    }
+
+    #resume-preview section {
+        margin-top: 8px !important;
+        break-inside: avoid;
+        page-break-inside: avoid;
+    }
+
+    #resume-preview p {
+        line-height: 1.25 !important;
+    }
+
+    #resume-preview [class*="space-y"]>*+* {
+        margin-top: 6px !important;
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* @import "tailwindcss";
+
+@media print {
+    @page {
+        size: A4;
+        margin: 6mm;
+    }
+
+    body {
+        background: white;
+    }
+
+    body * {
+        visibility: hidden;
+    }
+
+    #resume-preview,
+    #resume-preview * {
+        visibility: visible;
+    }
+
+    #resume-preview {
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 100%;
+        box-shadow: none !important;
+    }
+
+    #resume-preview>div {
+        min-height: auto !important;
+    }
+
+    #resume-preview h1 {
+        font-size: 21px !important;
+    }
+
+    #resume-preview h2 {
+        font-size: 10px !important;
+    }
+
+    #resume-preview section {
+        margin-top: 8px !important;
+        break-inside: avoid;
+        page-break-inside: avoid;
+    }
+
+    #resume-preview p {
+        line-height: 1.25 !important;
+    }
+
+    #resume-preview [class*="space-y"]>*+* {
+        margin-top: 6px !important;
+    }
+} */
