@@ -12,13 +12,32 @@ const createToken = (userId) => {
     })
 }
 
+// const emailTransporter = nodemailer.createTransport({
+//     service: 'gmail',
+//     auth: {
+//         user: process.env.EMAIL_USER,
+//         pass: process.env.EMAIL_APP_PASSWORD,
+//     },
+// })
+
 const emailTransporter = nodemailer.createTransport({
-    service: 'gmail',
+    host: 'smtp.gmail.com',
+    port: 465,
+    secure: true,
+    family: 4,
+    connectionTimeout: 30000,
+    greetingTimeout: 30000,
+    socketTimeout: 30000,
     auth: {
         user: process.env.EMAIL_USER,
         pass: process.env.EMAIL_APP_PASSWORD,
     },
 })
+
+
+
+
+
 
 // Register new user
 router.post('/register', async (req, res) => {
