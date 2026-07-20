@@ -1,4 +1,5 @@
 import ContactLinks from './ContactLinks'
+import CertificationLinks from './CertificationLinks'
 
 function MinimalSection({ title, children }) {
     return (
@@ -183,7 +184,7 @@ function MinimalTemplate({ resume }) {
                         </MinimalSection>
                     )}
 
-                    {(achievements.length > 0 || certifications.length > 0) && (
+                    {/* {(achievements.length > 0 || certifications.length > 0) && (
                         <MinimalSection title="Achievements">
                             <ul className="list-disc space-y-1 pl-4 text-xs leading-5">
                                 {achievements.map((achievement, index) => (
@@ -195,7 +196,50 @@ function MinimalTemplate({ resume }) {
                                 ))}
                             </ul>
                         </MinimalSection>
+                    )} */}
+
+                    {/* {(achievements.length > 0 ||
+                        certifications.length > 0 ||
+                        (resume.certificationDetails || []).length > 0) && (
+                            <MinimalSection title="Achievements & Certifications">
+                                {achievements.length > 0 && (
+                                    <ul className="list-disc space-y-1 pl-4 text-xs leading-5">
+                                        {achievements.map((achievement, index) => (
+                                            <li key={`achievement-${index}`}>{achievement}</li>
+                                        ))}
+                                    </ul>
+                                )}
+
+                                <div className={achievements.length > 0 ? 'mt-3' : ''}>
+                                    <CertificationLinks
+                                        certificationDetails={resume.certificationDetails || []}
+                                        legacyCertifications={resume.certifications}
+                                    />
+                                </div>
+                            </MinimalSection>
+                        )} */}
+
+                    {achievements.length > 0 && (
+                        <MinimalSection title="Achievements">
+                            <ul className="list-disc space-y-1 pl-4 text-xs leading-5">
+                                {achievements.map((achievement, index) => (
+                                    <li key={`achievement-${index}`}>{achievement}</li>
+                                ))}
+                            </ul>
+                        </MinimalSection>
                     )}
+
+                    {(certifications.length > 0 ||
+                        (resume.certificationDetails || []).length > 0) && (
+                            <MinimalSection title="Certifications">
+                                <CertificationLinks
+                                    certificationDetails={resume.certificationDetails || []}
+                                    legacyCertifications={resume.certifications}
+                                />
+                            </MinimalSection>
+                        )}
+
+
                 </aside>
             </div>
         </div>

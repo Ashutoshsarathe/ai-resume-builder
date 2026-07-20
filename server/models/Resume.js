@@ -225,6 +225,32 @@ const resumeSchema = new mongoose.Schema(
             type: String,
             default: '',
         },
+        certificationDetails: {
+            type: [
+                {
+                    title: {
+                        type: String,
+                        default: '',
+                    },
+
+                    issuer: {
+                        type: String,
+                        default: '',
+                    },
+
+                    year: {
+                        type: String,
+                        default: '',
+                    },
+
+                    credentialUrl: {
+                        type: String,
+                        default: '',
+                    },
+                },
+            ],
+            default: [],
+        },
 
         profileImage: {
             type: String,

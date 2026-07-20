@@ -1,4 +1,5 @@
 import ContactLinks from './ContactLinks'
+import CertificationLinks from './CertificationLinks'
 
 function SidebarSection({ title, children }) {
     return (
@@ -209,7 +210,7 @@ function ProfessionalSidebarTemplate({ resume }) {
                     </MainSection>
                 )}
 
-                {(achievements.length > 0 || certifications.length > 0) && (
+                {/* {(achievements.length > 0 || certifications.length > 0) && (
                     <MainSection title="Achievements & Certifications">
                         <ul className="list-disc space-y-1 pl-4 text-sm leading-6">
                             {achievements.map((achievement, index) => (
@@ -221,7 +222,47 @@ function ProfessionalSidebarTemplate({ resume }) {
                             ))}
                         </ul>
                     </MainSection>
+                )} */}
+                {/* {(achievements.length > 0 ||
+                    certifications.length > 0 ||
+                    (resume.certificationDetails || []).length > 0) && (
+                        <MainSection title="Achievements & Certifications">
+                            {achievements.length > 0 && (
+                                <ul className="list-disc space-y-1 pl-4 text-sm leading-6">
+                                    {achievements.map((achievement, index) => (
+                                        <li key={`achievement-${index}`}>{achievement}</li>
+                                    ))}
+                                </ul>
+                            )}
+
+                            <div className={achievements.length > 0 ? 'mt-3' : ''}>
+                                <CertificationLinks
+                                    certificationDetails={resume.certificationDetails || []}
+                                    legacyCertifications={resume.certifications}
+                                />
+                            </div>
+                        </MainSection>
+                    )} */}
+
+                {achievements.length > 0 && (
+                    <MainSection title="Achievements">
+                        <ul className="list-disc space-y-1 pl-4 text-sm leading-6">
+                            {achievements.map((achievement, index) => (
+                                <li key={`achievement-${index}`}>{achievement}</li>
+                            ))}
+                        </ul>
+                    </MainSection>
                 )}
+
+                {(certifications.length > 0 ||
+                    (resume.certificationDetails || []).length > 0) && (
+                        <MainSection title="Certifications">
+                            <CertificationLinks
+                                certificationDetails={resume.certificationDetails || []}
+                                legacyCertifications={resume.certifications}
+                            />
+                        </MainSection>
+                    )}
             </main>
         </div>
     )

@@ -1,4 +1,5 @@
 import ContactLinks from './ContactLinks'
+import CertificationLinks from './CertificationLinks'
 
 function Section({ title, children }) {
     return (
@@ -256,7 +257,7 @@ function AtsClassicPreview({ resume }) {
                 </Section>
             )}
 
-            {(achievementLines.length > 0 || certificationLines.length > 0) && (
+            {/* {(achievementLines.length > 0 || certificationLines.length > 0) && (
                 <Section title="Achievements & Certifications">
                     <ul className="list-disc space-y-1 pl-4">
                         {achievementLines.map((achievement, index) => (
@@ -268,7 +269,53 @@ function AtsClassicPreview({ resume }) {
                         ))}
                     </ul>
                 </Section>
+            )} */}
+
+            {/* {(achievementLines.length > 0 ||
+                certificationLines.length > 0 ||
+                (resume.certificationDetails || []).length > 0) && (
+                    <Section title="Achievements & Certifications">
+                        {achievementLines.length > 0 && (
+                            <ul className="list-disc space-y-1 pl-4">
+                                {achievementLines.map((achievement, index) => (
+                                    <li key={`achievement-${index}`}>{achievement}</li>
+                                ))}
+                            </ul>
+                        )}
+
+                        <div className={achievementLines.length > 0 ? 'mt-2' : ''}>
+                            <CertificationLinks
+                                certificationDetails={resume.certificationDetails || []}
+                                legacyCertifications={resume.certifications}
+                            />
+                        </div>
+                    </Section>
+                )} */}
+
+            {achievementLines.length > 0 && (
+                <Section title="Achievements">
+                    <ul className="list-disc space-y-1 pl-4">
+                        {achievementLines.map((achievement, index) => (
+                            <li key={`achievement-${index}`}>{achievement}</li>
+                        ))}
+                    </ul>
+                </Section>
             )}
+
+            {(certificationLines.length > 0 ||
+                (resume.certificationDetails || []).length > 0) && (
+                    <Section title="Certifications">
+                        {/* <CertificationLinks
+                            certificationDetails={resume.certificationDetails || []}
+                            legacyCertifications={resume.certifications}
+                        /> */}
+                        <CertificationLinks
+                            certificationDetails={resume.certificationDetails || []}
+                            legacyCertifications={resume.certifications}
+                            compact
+                        />
+                    </Section>
+                )}
         </div>
     )
 }

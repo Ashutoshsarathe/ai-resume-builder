@@ -63,6 +63,14 @@ const initialResume = {
     ],
     achievements: '',
     certifications: '',
+    certificationDetails: [
+        {
+            title: '',
+            issuer: '',
+            year: '',
+            credentialUrl: '',
+        },
+    ],
 }
 
 function InputField({ label, name, value, onChange, placeholder }) {
@@ -147,6 +155,12 @@ function ResumeEditor() {
                                     location: '',
                                 },
                             ],
+
+                    // new added
+                    certificationDetails:
+                        data.resume.certificationDetails?.length > 0
+                            ? data.resume.certificationDetails
+                            : initialResume.certificationDetails,
                 })
 
                 // setTemplate(data.resume.template || 'modern')
@@ -206,6 +220,13 @@ function ResumeEditor() {
                     parsedResumeData.educationDetails?.length > 0
                         ? parsedResumeData.educationDetails
                         : initialResume.educationDetails,
+
+                // new Added
+
+                certificationDetails:
+                    parsedResumeData.certificationDetails?.length > 0
+                        ? parsedResumeData.certificationDetails
+                        : initialResume.certificationDetails,
             })
 
             // setTemplate('modern')
@@ -328,6 +349,53 @@ function ResumeEditor() {
             ...previousResume,
             educationDetails: previousResume.educationDetails.filter(
                 (_, educationIndex) => educationIndex !== index
+            ),
+        }))
+
+        setSaved(false)
+    }
+
+
+    const updateCertification = (index, field, value) => {
+        setResume((previousResume) => {
+            const updatedCertifications = [...previousResume.certificationDetails]
+
+            updatedCertifications[index] = {
+                ...updatedCertifications[index],
+                [field]: value,
+            }
+
+            return {
+                ...previousResume,
+                certificationDetails: updatedCertifications,
+            }
+        })
+
+        setSaved(false)
+    }
+
+    const addCertification = () => {
+        setResume((previousResume) => ({
+            ...previousResume,
+            certificationDetails: [
+                ...previousResume.certificationDetails,
+                {
+                    title: '',
+                    issuer: '',
+                    year: '',
+                    credentialUrl: '',
+                },
+            ],
+        }))
+
+        setSaved(false)
+    }
+
+    const removeCertification = (index) => {
+        setResume((previousResume) => ({
+            ...previousResume,
+            certificationDetails: previousResume.certificationDetails.filter(
+                (_, certificationIndex) => certificationIndex !== index
             ),
         }))
 
@@ -1192,7 +1260,7 @@ function ResumeEditor() {
 
                         </section>
 
-                        <section>
+                        {/* <section>
                             <h3 className="mb-3 text-lg font-bold">Certifications</h3>
 
                             <p className="mb-3 text-sm text-slate-500">
@@ -1208,7 +1276,7 @@ function ResumeEditor() {
                                 placeholder="Meta Front-End Developer Certificate&#10;JavaScript Certification"
                             />
 
-                            {/* ai features */}
+                            ai features
 
 
                             <div className="mt-3 flex justify-end">
@@ -1224,7 +1292,100 @@ function ResumeEditor() {
                                         : 'Improve Certifications with AI'}
                                 </button>
                             </div>
+                        </section> */}
+
+
+                        <section>
+                            <div className="flex items-center justify-between gap-3">
+                                <h3 className="mb-3 text-lg font-bold">Certifications</h3>
+
+                                <button
+                                    type="button"
+                                    onClick={addCertification}
+                                    className="rounded-lg bg-blue-600 px-3 py-2 text-sm font-semibold text-white hover:bg-blue-700"
+                                >
+                                    + Add Another Certification
+                                </button>
+                            </div>
+
+                            <p className="mb-4 text-sm text-slate-500">
+                                Add certification name, issuer, completion year, and credential link.
+                            </p>
+
+                            <div className="space-y-5">
+                                {resume.certificationDetails.map((certification, index) => (
+                                    <div
+                                        key={index}
+                                        className="rounded-xl border border-slate-200 bg-slate-50 p-5"
+                                    >
+                                        <div className="mb-4 flex items-center justify-between">
+                                            <h4 className="font-bold text-slate-800">
+                                                Certification {index + 1}
+                                            </h4>
+
+                                            {resume.certificationDetails.length > 1 && (
+                                                <button
+                                                    type="button"
+                                                    onClick={() => removeCertification(index)}
+                                                    className="text-sm font-semibold text-red-600 hover:text-red-700"
+                                                >
+                                                    Remove
+                                                </button>
+                                            )}
+                                        </div>
+
+                                        <div className="grid gap-4 sm:grid-cols-2">
+                                            <InputField
+                                                label="Certification Name"
+                                                name={`certification-title-${index}`}
+                                                value={certification.title}
+                                                onChange={(event) =>
+                                                    updateCertification(index, 'title', event.target.value)
+                                                }
+                                                placeholder="Example: Full Stack Web Development"
+                                            />
+
+                                            <InputField
+                                                label="Issuing Organization"
+                                                name={`certification-issuer-${index}`}
+                                                value={certification.issuer}
+                                                onChange={(event) =>
+                                                    updateCertification(index, 'issuer', event.target.value)
+                                                }
+                                                placeholder="Example: Coding Thinker"
+                                            />
+                                        </div>
+
+                                        <div className="mt-4 grid gap-4 sm:grid-cols-2">
+                                            <InputField
+                                                label="Completion Year"
+                                                name={`certification-year-${index}`}
+                                                value={certification.year}
+                                                onChange={(event) =>
+                                                    updateCertification(index, 'year', event.target.value)
+                                                }
+                                                placeholder="2026"
+                                            />
+
+                                            <InputField
+                                                label="Credential / Certificate URL"
+                                                name={`certification-url-${index}`}
+                                                value={certification.credentialUrl}
+                                                onChange={(event) =>
+                                                    updateCertification(index, 'credentialUrl', event.target.value)
+                                                }
+                                                placeholder="https://certificate-link.com"
+                                            />
+                                        </div>
+                                    </div>
+                                ))}
+                            </div>
                         </section>
+
+
+
+
+
                     </div>
                 </section>
 

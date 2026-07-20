@@ -2,6 +2,7 @@ import AtsClassicPreview from './AtsClassicPreview'
 import MinimalTemplate from './MinimalTemplate'
 import ProfessionalSidebarTemplate from './ProfessionalSidebarTemplate'
 import ContactLinks from './ContactLinks'
+import CertificationLinks from './CertificationLinks'
 
 function ModernSection({ title, children }) {
     return (
@@ -301,13 +302,23 @@ function ResumePreview({ resume, template }) {
                     </ModernSection>
                 )}
 
-                {resume.certifications && (
+                {/* {resume.certifications && (
                     <ModernSection title="Certifications">
                         <p className="whitespace-pre-line text-sm leading-6">
                             {resume.certifications}
                         </p>
                     </ModernSection>
-                )}
+                )} */}
+
+                {(resume.certifications ||
+                    (resume.certificationDetails || []).length > 0) && (
+                        <ModernSection title="Certifications">
+                            <CertificationLinks
+                                certificationDetails={resume.certificationDetails || []}
+                                legacyCertifications={resume.certifications}
+                            />
+                        </ModernSection>
+                    )}
             </div>
         </div>
     )
