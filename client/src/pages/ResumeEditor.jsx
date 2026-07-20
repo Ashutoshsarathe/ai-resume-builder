@@ -170,7 +170,21 @@ function ResumeEditor() {
 
         const uploadedResumeData = localStorage.getItem('uploadedResumeData')
 
+        // if (!uploadedResumeData) {
+        //     return
+        // }
         if (!uploadedResumeData) {
+            const savedUser = JSON.parse(localStorage.getItem('user') || '{}')
+
+            setResume({
+                ...initialResume,
+                title: savedUser.name
+                    ? `Resume of ${savedUser.name}`
+                    : initialResume.title,
+                fullName: savedUser.name || initialResume.fullName,
+                email: savedUser.email || initialResume.email,
+            })
+
             return
         }
 
